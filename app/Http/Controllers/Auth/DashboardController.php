@@ -13,32 +13,32 @@ use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
-    public function index() 
+    public function index()
     {
-       
+
         // $chart = DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[0|5|4]' group by month ORDER BY month ASC");
 
         // $mtn =DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE  YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[7|8|6]' group by month ORDER BY month ASC");
-        
+
         $colourms=$colours=$colours_api_mtn=$colours_api_airtel=[];
 
-   
+
         // for ($i=0; $i<=count($chart); $i++) {
 
-        //     $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);       
+        //     $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
 
         // }
 
-        // for ($i=0; $i < count($mtn); $i++) { 
+        // for ($i=0; $i < count($mtn); $i++) {
         //     $colourms[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
         // }
-   
+
 
         // $chardt['labels'] = (array_column($chart,"month"));
         // $chardt['dataset'] = (array_column($chart,"total"));
         // $chardt['colours'] = $colours;
         // $chardt = (object)  $chardt;
-        
+
         // $charmt['labels'] = (array_column($mtn,"month"));
         // $charmt['dataset'] = (array_column($mtn,"total"));
         // $charmt['colours'] = $colourms;
@@ -61,9 +61,42 @@ class DashboardController extends Controller
         return view('auth.dashboard',compact('reports','units','lists'));
     }
 
+
+
+    public function user_charts(){
+
+        $chart = DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[0|5|4]' group by month ORDER BY month ASC");
+        $mtn =DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE  YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[7|8|6]' group by month ORDER BY month ASC");
+
+        for ($i=0; $i<=count($chart); $i++) {
+
+            $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+
+        }
+
+        for ($i=0; $i < count($mtn); $i++) {
+            $colourms[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+        }
+
+
+        $chardt['labels'] = (array_column($chart,"month"));
+        $chardt['dataset'] = (array_column($chart,"total"));
+        $chardt['colours'] = $colours;
+        $chardt = (object)  $chardt;
+
+        $charmt['labels'] = (array_column($mtn,"month"));
+        $charmt['dataset'] = (array_column($mtn,"total"));
+        $charmt['colours'] = $colourms;
+        $charmt = (object)  $charmt;
+
+        return response()->json($charmt);
+
+    }
+
+
     public function sms_logs(){
 
-        $totalsms = DB::select(" 
+        $totalsms = DB::select("
             SELECT COUNT(*) AS total
             FROM bill_logs"
          );
@@ -79,25 +112,25 @@ class DashboardController extends Controller
         // Handle the DLR webhook here
         $senderid = Request::createFromGlobals()->get('senderid');
         Log::info($senderid);
-       
+
         $phonenum = Request::createFromGlobals()->get('phonenum');
         Log::info($phonenum);
-       
+
         $dlrvalue = Request::createFromGlobals()->get('dlrvalue');
         Log::info($dlrvalue);
-        
+
         $smscid = Request::createFromGlobals()->get('smscid');
         Log::info($smscid);
-        
+
         $smsid = Request::createFromGlobals()->get('smsid');
         Log::info($smsid);
-       
+
         $user_id = Request::createFromGlobals()->get('user_id');
         Log::info($user_id);
-        
+
         $log_no = Request::createFromGlobals()->get('log_no');
         Log::info($log_no);
-        
+
         $message = Request::createFromGlobals()->get('message');
         Log::info($message);
 
@@ -119,7 +152,7 @@ class DashboardController extends Controller
                     'list_id' => '0',
                     'bill_id' => '0',
                     'msg' => $message
-                    
+
                 ]);
                 break;
                 default:
@@ -136,11 +169,11 @@ class DashboardController extends Controller
                     'list_id' => '0',
                     'bill_id' => '0',
                     'msg' => $message
-                    
+
                 ]);
 
                 Log::info("Delivery reports inserted successfully!");
-        
+
             }
 
     }
@@ -186,9 +219,9 @@ class DashboardController extends Controller
 
     public function sms_units($id)
     {
-        
+
         $user_credit = SmsCredit::firstOrCreate(['user_id' => $id,'currency' => "UGX"],[ 'units' => 0, 'smscost' => 0]);
-   
+
         $sms_units =$user_credit->units;
 
         $sms_units =$user_credit->smscost;
@@ -200,8 +233,8 @@ class DashboardController extends Controller
 
     public function num_lists()
     {
-       
-        $numkeywds = DB::select(" 
+
+        $numkeywds = DB::select("
             SELECT COUNT(*) AS total
             FROM bcastlists"
          );

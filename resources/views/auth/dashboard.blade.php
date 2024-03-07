@@ -11,12 +11,12 @@
          <span style="padding-right: 10px;" id="user_units">Units: 0</span>
          <div id="timeNow" class="sm:ml-auto mt-3 sm:mt-0 relative text-gray-700 dark:text-gray-300"></div>
       </div>
-      <div class="grid grid-cols-12 gap-6 mt-5">    
+      <div class="grid grid-cols-12 gap-6 mt-5">
          <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
             <div class="report-box zoom-in">
                <div class="box p-5">
                   <div class="flex">
-                     <i data-feather="bar-chart" class="report-box__icon text-theme-12"></i> 
+                     <i data-feather="bar-chart" class="report-box__icon text-theme-12"></i>
                      <div class="ml-auto">
                         <div class="report-box__indicator bg-theme-9 tooltip cursor-pointer" title="12% Higher than last month"> 12% <i data-feather="chevron-up" class="w-4 h-4"></i> </div>
                      </div>
@@ -30,7 +30,7 @@
             <div class="report-box zoom-in">
                <div class="box p-5">
                   <div class="flex">
-                     <i data-feather="bar-chart" class="report-box__icon text-theme-9"></i> 
+                     <i data-feather="bar-chart" class="report-box__icon text-theme-9"></i>
                      <div class="ml-auto">
                         <div class="report-box__indicator bg-theme-9 tooltip cursor-pointer" title="22% Higher than last month"> 22% <i data-feather="chevron-up" class="w-4 h-4"></i> </div>
                      </div>
@@ -55,7 +55,7 @@
     </div>
    </div>
 </div>
-</div>   
+</div>
 @endsection
 @section('styles')
 <!-- plugins:css -->
@@ -68,7 +68,88 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<!-- First check if a target element exists
+Get the data from the back end us ajax
+pass data to the view  -->
+
 <script>
+
+    if (document.readyState === 'complete') {
+        console.log('Full page complete ...');
+        // The page is fully loaded
+        var targetDiv = document.getElementById('userChart')
+        console.log('Can find the target div ...'+targetDiv);
+
+        if(targetDiv.length > 0) {
+            console.log('Div found ...');
+            fetch('/user_charts').then(function (data) {
+                console.log(data);
+                console.log('Fetch response ....');
+                // data.json().then(function (units) {
+                //     console.log(units);
+                // });
+            });
+        }
+    }
+
+
+
+
+
+    // var ctx = document.getElementById('userChart').getContext('2d');
+    // var chart = new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels:  {!!json_encode($chardt->labels)!!} ,
+    //         datasets: [
+    //             {
+    //                 label: 'Airtel Bulk Messages',
+    //                 backgroundColor: {!! json_encode($chardt->colours)!!} ,
+    //                 data:  {!! json_encode($chardt->dataset)!!} ,
+    //             },
+	// 			{
+    //                 label: 'MTN Bulk Messages',
+    //                 backgroundColor: {!! json_encode($charmt->colours)!!} ,
+    //                 data:  {!! json_encode($charmt->dataset)!!} ,
+    //             },
+    //         ]
+    //     },
+    //     options: {
+    //         scales: {
+    //             yAxes: [{
+    //                 ticks: {
+    //                     beginAtZero: true,
+    //                     callback: function(value) {if (value % 1 === 0) {return value;}}
+    //                 },
+    //                 scaleLabel: {
+    //                     display: false
+    //                 }
+    //             }]
+    //         },
+    //         legend: {
+    //             labels: {
+    //                 // This more specific font property overrides the global property
+    //                 fontColor: '#122C4B',
+    //                 fontFamily: "'Muli', sans-serif",
+    //                 padding: 25,
+    //                 boxWidth: 25,
+    //                 fontSize: 14,
+    //             }
+    //         },
+    //         layout: {
+    //             padding: {
+    //                 left: 10,
+    //                 right: 10,
+    //                 top: 0,
+    //                 bottom: 10
+    //             }
+    //         }
+    //     }
+    // });
+</script>
+<script>
+
 (function foo(){
     var tday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
     var tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
@@ -76,7 +157,7 @@
         var d = new Date();
         var nday=d.getDay()
         var nmonth=d.getMonth()
-        var ndate = d.getDate(); 
+        var ndate = d.getDate();
         var hours = d.getHours();
         var clientTime =" "+ tday[nday] + " " +tmonth[nmonth] + " " + ndate + ", " + hours + ":"  + d.getMinutes() + ":" + d.getSeconds() + " " + (hours >= 12 ? 'pm' : 'am');
         //alert(clientTime);
@@ -86,15 +167,15 @@
     })();
 
     (function userUnits () {
-    
+
     fetch('/users/units').then(function (data) {
-     
+
       data.json().then(function (units) {
         console.log(units);
         document.getElementById("user_units").innerHTML = `Units: ${units.units}`;
       });
     });
-     
+
   })();
 </script>
 <!-- inject:js -->
