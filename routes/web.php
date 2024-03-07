@@ -40,7 +40,7 @@ use Illuminate\Http\Request;
 //     //Route::get('/dashboard', 'dashboard')->name('dashboard');
 //     Route::get('/', 'DashboardController@index')->name('auth.dasboard');
 //     //Route::get('/', [DashboardController::class, 'index'])->name('auth.dashboard');
-//     Route::get('logout', [AuthController::class, 'logout'])->name('logout');    
+//     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 // });
 
 Route::post('/addlistsaction',[AddlistController::class,'storelist']);
@@ -68,7 +68,9 @@ Route::post('/editlist', [Managelist::class,'editlist']);
 //Route::post('/keywordupdate', [KeywordsController::class,'update']);
 
 Route::get('/dlr',[DashboardController::class,'bulksmsdeliveryreports']);
-    
+
+Route::get('/user_charts',[DashboardController::class,'user_charts']);
+
 //Route::get('/receive_sms',[MoSmsController::class,'receivesms']);
 
 Route::get('/receive',[KeywordsController::class,'receivesms']);
@@ -88,14 +90,14 @@ Route::post('/keywordupdate/{keyword}/update',[KeywordsController::class,'update
 Route::middleware('auth')->group(function() {
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('logout', [AuthController::class, 'logout'])->name('logout'); 
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::middleware('loggedin')->group(function() {
     Route::get('login', [AuthController::class, 'loginView'])->name('login-view');
     Route::post('login', [AuthController::class, 'login'])->name('login');
-    
-    
+
+
     //Route::get('register', [AuthController::class, 'registerView'])->name('register-view');
     //Route::post('register', [AuthController::class, 'register'])->name('register');
 });
@@ -118,7 +120,7 @@ Route::group(['prefix' => 'users'], function() {
     Route::post('/{user}/update', [UserController::class ,'update'])->name('users.update');
     Route::get('/{user}/delete', [UserController::class ,'destroy'])->name('users.destroy');
     Route::get('/units', [UserController::class ,'units'])->name('users.units');
-    
+
 });
 //Route::resource('roles', RoleController::class);
 

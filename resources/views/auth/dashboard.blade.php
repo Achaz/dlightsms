@@ -75,79 +75,18 @@ pass data to the view  -->
 
 <script>
 
-    if (document.readyState === 'complete') {
-        console.log('Full page complete ...');
-        // The page is fully loaded
-        var targetDiv = document.getElementById('userChart')
-        console.log('Can find the target div ...'+targetDiv);
+(function(userChart) {
+    "use strict";
 
-        if(targetDiv.length > 0) {
-            console.log('Div found ...');
-            fetch('/user_charts').then(function (data) {
-                console.log(data);
-                console.log('Fetch response ....');
-                // data.json().then(function (units) {
-                //     console.log(units);
-                // });
-            });
-        }
+    // Chart
+    if (cash('#userChart').length) {
+        console.log('The target div has been found ...');
     }
 
+})(userChart)
 
-
-
-
-    // var ctx = document.getElementById('userChart').getContext('2d');
-    // var chart = new Chart(ctx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels:  {!!json_encode($chardt->labels)!!} ,
-    //         datasets: [
-    //             {
-    //                 label: 'Airtel Bulk Messages',
-    //                 backgroundColor: {!! json_encode($chardt->colours)!!} ,
-    //                 data:  {!! json_encode($chardt->dataset)!!} ,
-    //             },
-	// 			{
-    //                 label: 'MTN Bulk Messages',
-    //                 backgroundColor: {!! json_encode($charmt->colours)!!} ,
-    //                 data:  {!! json_encode($charmt->dataset)!!} ,
-    //             },
-    //         ]
-    //     },
-    //     options: {
-    //         scales: {
-    //             yAxes: [{
-    //                 ticks: {
-    //                     beginAtZero: true,
-    //                     callback: function(value) {if (value % 1 === 0) {return value;}}
-    //                 },
-    //                 scaleLabel: {
-    //                     display: false
-    //                 }
-    //             }]
-    //         },
-    //         legend: {
-    //             labels: {
-    //                 // This more specific font property overrides the global property
-    //                 fontColor: '#122C4B',
-    //                 fontFamily: "'Muli', sans-serif",
-    //                 padding: 25,
-    //                 boxWidth: 25,
-    //                 fontSize: 14,
-    //             }
-    //         },
-    //         layout: {
-    //             padding: {
-    //                 left: 10,
-    //                 right: 10,
-    //                 top: 0,
-    //                 bottom: 10
-    //             }
-    //         }
-    //     }
-    // });
 </script>
+
 <script>
 
 (function foo(){
