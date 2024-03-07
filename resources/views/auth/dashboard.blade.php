@@ -88,6 +88,56 @@ pass data to the view  -->
                 console.log(response.chardt);
                 console.log(response.charmt);
                 console.log(response.chardt.colours);
+                var ctx = cash('#userChart')[0].getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels:  response.chardt.labels ,
+                        datasets: [
+                            {
+                                label: 'Airtel Bulk Messages',
+                                backgroundColor: response.chardt.colours ,
+                                data:  response.chardt.dataset ,
+                            },
+                            {
+                                label: 'MTN Bulk Messages',
+                                backgroundColor: response.chardt.colours ,
+                                data:  response.charmt.dataset ,
+                            },
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    callback: function(value) {if (value % 1 === 0) {return value;}}
+                                },
+                                scaleLabel: {
+                                    display: false
+                                }
+                            }]
+                        },
+                        legend: {
+                            labels: {
+                                // This more specific font property overrides the global property
+                                fontColor: '#122C4B',
+                                fontFamily: "'Muli', sans-serif",
+                                padding: 25,
+                                boxWidth: 25,
+                                fontSize: 14,
+                            }
+                        },
+                        layout: {
+                            padding: {
+                                left: 10,
+                                right: 10,
+                                top: 0,
+                                bottom: 10
+                            }
+                        }
+                    }
+                });
             });
         });
     }
