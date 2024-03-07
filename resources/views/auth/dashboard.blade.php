@@ -152,29 +152,24 @@ pass data to the view  -->
 
             fetch('/bulksmsmtn').then(function (data) {
                 data.json().then(function (response) {
-                    console.log(response);
+                    console.log('MTN ...'+response);
                 });
             });
         }
-    });
-})(jQuery);
 
-
-(function($) {
-    "use strict";
-    $(function() {
-        if (document.getElementById("bulkSmsAirtel").length) {
+        if ($("#bulkSmsAirtel").length) {
             console.log('The bulksmsairtel target div has been found ...');
-            console.log(document.getElementById("bulkSmsAirtel"));
+            console.log($("#bulkSmsAirtel"));
 
             fetch('/bulksmsairtel').then(function (data) {
                 data.json().then(function (response) {
-                    console.log(response);
+                    console.log('Airtel ...'+response);
                 });
             });
         }
     });
 })(jQuery);
+
 
 </script>
 
