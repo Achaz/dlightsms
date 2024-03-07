@@ -142,12 +142,12 @@ pass data to the view  -->
 
 <script>
 
-(function(smssts) {
+(function(bulkSms) {
     "use strict";
 
-    if (smssts('#bulksmsmtn').length) {
+    if (bulkSms('#bulksmsmtn').length) {
         console.log('The bulksmsmtn target div has been found ...');
-        console.log(smssts('#bulksmsmtn'));
+        console.log(bulkSms('#bulksmsmtn'));
 
         fetch('/bulksmsmtn').then(function (data) {
             data.json().then(function (response) {
@@ -156,9 +156,9 @@ pass data to the view  -->
         });
     }
 
-    if (smssts('#bulksmsairtel').length) {
+    if (bulkSms('#bulksmsairtel').length) {
         console.log('The bulksmsairtel target div has been found ...');
-        console.log(smssts('#bulksmsairtel'));
+        console.log(bulkSms('#bulksmsairtel'));
 
         fetch('/bulksmsairtel').then(function (data) {
             data.json().then(function (response) {
@@ -167,7 +167,7 @@ pass data to the view  -->
         });
     }
 
-})(smssts)
+})(bulkSms)
 
 </script>
 
