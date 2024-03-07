@@ -84,12 +84,14 @@ class DashboardController extends Controller
         $chardt['labels'] = (array_column($chart,"month"));
         $chardt['dataset'] = (array_column($chart,"total"));
         $chardt['colours'] = $colours;
-        //$chardt = (object)  $chardt;
+        $chardt = (object)  $chardt;
 
         $charmt['labels'] = (array_column($mtn,"month"));
         $charmt['dataset'] = (array_column($mtn,"total"));
         $charmt['colours'] = $colourms;
-        //$charmt = (object)  $charmt;
+        $charmt = (object)  $charmt;
+
+        print_r($chardt);
 
         return response()->json($charmt);
 
