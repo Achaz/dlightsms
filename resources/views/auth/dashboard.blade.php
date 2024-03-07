@@ -85,6 +85,9 @@ pass data to the view  -->
         fetch('/usercharts').then(function (data) {
             data.json().then(function (response) {
                 console.log(response);
+                console.log(response.chardt);
+                console.log(response.charmt);
+                console.log(response.chardt.colours);
             });
         });
     }

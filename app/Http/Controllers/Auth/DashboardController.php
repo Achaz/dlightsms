@@ -91,7 +91,12 @@ class DashboardController extends Controller
         $charmt['colours'] = $colourms;
         //$charmt = (object)  $charmt;
 
-        return response()->json($chardt);
+        $consolidatedData = [
+            'chardt'=>$chardt,
+            'charmt'=>$charmt
+        ];
+
+        return response()->json($consolidatedData);
 
     }
 
