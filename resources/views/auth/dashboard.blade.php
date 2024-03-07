@@ -151,7 +151,7 @@ pass data to the view  -->
                 var targetDiv = $(this)
                 fetch('/bulksmsmtn').then(function (data) {
                     data.json().then(function (response) {
-                        targetDiv.text();
+                        targetDiv.text(response);
                     });
                 });
             })
