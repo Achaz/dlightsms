@@ -65,31 +65,31 @@ class DashboardController extends Controller
 
     public function user_charts(){
 
-        $chart = DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[0|5|4]' group by month ORDER BY month ASC");
-        $mtn =DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE  YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[7|8|6]' group by month ORDER BY month ASC");
+        // $chart = DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[0|5|4]' group by month ORDER BY month ASC");
+        // $mtn =DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE  YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[7|8|6]' group by month ORDER BY month ASC");
 
-        for ($i=0; $i<=count($chart); $i++) {
+        // for ($i=0; $i<=count($chart); $i++) {
 
-            $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+        //     $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
 
-        }
+        // }
 
-        for ($i=0; $i < count($mtn); $i++) {
-            $colourms[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-        }
+        // for ($i=0; $i < count($mtn); $i++) {
+        //     $colourms[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+        // }
 
 
-        $chardt['labels'] = (array_column($chart,"month"));
-        $chardt['dataset'] = (array_column($chart,"total"));
-        $chardt['colours'] = $colours;
-        //$chardt = (object)  $chardt;
+        // $chardt['labels'] = (array_column($chart,"month"));
+        // $chardt['dataset'] = (array_column($chart,"total"));
+        // $chardt['colours'] = $colours;
+        // //$chardt = (object)  $chardt;
 
-        $charmt['labels'] = (array_column($mtn,"month"));
-        $charmt['dataset'] = (array_column($mtn,"total"));
-        $charmt['colours'] = $colourms;
-        //$charmt = (object)  $charmt;
+        // $charmt['labels'] = (array_column($mtn,"month"));
+        // $charmt['dataset'] = (array_column($mtn,"total"));
+        // $charmt['colours'] = $colourms;
+        // //$charmt = (object)  $charmt;
 
-        return json_encode($charmt);
+        return 'response from the controller ...';
 
     }
 
