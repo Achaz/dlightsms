@@ -16,33 +16,7 @@ class DashboardController extends Controller
     public function index()
     {
 
-        // $chart = DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[0|5|4]' group by month ORDER BY month ASC");
-
-        // $mtn =DB::select("SELECT CONCAT(DATE_FORMAT(ts_stamp,'%b'),' ',YEAR(ts_stamp)) as month,count(phonenum) AS total FROM ost_dlr_reports WHERE  YEAR(ts_stamp) = YEAR(CURDATE()) AND phonenum REGEXP '^2567[7|8|6]' group by month ORDER BY month ASC");
-
         $colourms=$colours=$colours_api_mtn=$colours_api_airtel=[];
-
-
-        // for ($i=0; $i<=count($chart); $i++) {
-
-        //     $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-
-        // }
-
-        // for ($i=0; $i < count($mtn); $i++) {
-        //     $colourms[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-        // }
-
-
-        // $chardt['labels'] = (array_column($chart,"month"));
-        // $chardt['dataset'] = (array_column($chart,"total"));
-        // $chardt['colours'] = $colours;
-        // $chardt = (object)  $chardt;
-
-        // $charmt['labels'] = (array_column($mtn,"month"));
-        // $charmt['dataset'] = (array_column($mtn,"total"));
-        // $charmt['colours'] = $colourms;
-        // $charmt = (object)  $charmt;
 
         $reports = $this->sms_logs();
 
@@ -50,18 +24,8 @@ class DashboardController extends Controller
 
         $lists = $this->num_lists();
 
-        // $tokens_airtel = $this->tokens_airtel();
-
-        // $tokens_mtn = $this->tokens_mtn();
-
-        // $bulk_sms_mtn = $this ->bulk_mtn();
-
-        // $bulk_sms_airtel = $this->bulk_airtel();
-
         return view('auth.dashboard',compact('reports','units','lists'));
     }
-
-
 
     public function user_charts(){
 
@@ -100,7 +64,6 @@ class DashboardController extends Controller
 
     }
 
-
     public function sms_logs(){
 
         $totalsms = DB::select("
@@ -111,7 +74,6 @@ class DashboardController extends Controller
         return $totalsms;
 
     }
-
 
     public function bulksmsdeliveryreports(Request $request)
     {
