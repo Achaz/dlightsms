@@ -82,7 +82,7 @@ pass data to the view  -->
     if (cash('#userChart').length) {
         console.log('The target div has been found ...');
         console.log(cash('#userChart')[0]);
-        fetch('/user_charts').then(function (data) {
+        fetch('/usercharts').then(function (data) {
             console.log(data);
             console.log('Fetch response ....');
             // data.json().then(function (units) {

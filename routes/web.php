@@ -69,7 +69,7 @@ Route::post('/editlist', [Managelist::class,'editlist']);
 
 Route::get('/dlr',[DashboardController::class,'bulksmsdeliveryreports']);
 
-Route::get('/user_charts',[DashboardController::class,'user_charts']);
+Route::get('/usercharts',[DashboardController::class,'user_charts']);
 
 //Route::get('/receive_sms',[MoSmsController::class,'receivesms']);
 
