@@ -54,11 +54,11 @@ class DashboardController extends Controller
 
         // $tokens_mtn = $this->tokens_mtn();
 
-        // $bulk_sms_mtn = $this ->bulk_mtn();
+        $bulk_sms_mtn = $this ->bulk_mtn();
 
-        // $bulk_sms_airtel = $this->bulk_airtel();
+        $bulk_sms_airtel = $this->bulk_airtel();
 
-        return view('auth.dashboard',compact('reports','units','lists'));
+        return view('auth.dashboard',compact('reports','units','lists','bulk_sms_mtn','bulk_sms_airtel'));
     }
 
 
