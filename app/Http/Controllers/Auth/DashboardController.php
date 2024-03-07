@@ -91,7 +91,7 @@ class DashboardController extends Controller
         $charmt['colours'] = $colourms;
         //$charmt = (object)  $charmt;
 
-        return json_encode($charmt);
+        return response()->json($charmt);
 
     }
 

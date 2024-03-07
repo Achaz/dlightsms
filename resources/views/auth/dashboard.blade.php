@@ -83,11 +83,9 @@ pass data to the view  -->
         console.log('The target div has been found ...');
         console.log(cash('#userChart')[0]);
         fetch('/usercharts').then(function (data) {
-            console.log(data);
-            console.log('Fetch response ....');
-            // data.json().then(function (units) {
-            //     console.log(units);
-            // });
+            data.json().then(function (response) {
+                console.log(response);
+            });
         });
     }
 
