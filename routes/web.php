@@ -70,6 +70,8 @@ Route::post('/editlist', [Managelist::class,'editlist']);
 Route::get('/dlr',[DashboardController::class,'bulksmsdeliveryreports']);
 
 Route::get('/usercharts',[DashboardController::class,'user_charts']);
+Route::get('/bulksmsmtn',[DashboardController::class,'bulk_mtn']);
+Route::get('/bulksmsairtel',[DashboardController::class,'bulk_airtel']);
 
 //Route::get('/receive_sms',[MoSmsController::class,'receivesms']);
 

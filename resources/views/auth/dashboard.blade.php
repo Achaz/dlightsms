@@ -21,7 +21,7 @@
                         <div class="report-box__indicator bg-theme-9 tooltip cursor-pointer" title="12% Higher than last month"> 12% <i data-feather="chevron-up" class="w-4 h-4"></i> </div>
                      </div>
                   </div>
-                  <div class="text-3xl font-bold leading-8 mt-6">{{ $bulk_sms_mtn }}</div>
+                  <div id="bulksmsmtn" class="text-3xl font-bold leading-8 mt-6">0</div>
                   <div class="text-base text-gray-600 mt-1">Bulk MTN</div>
                </div>
             </div>
@@ -35,7 +35,7 @@
                         <div class="report-box__indicator bg-theme-9 tooltip cursor-pointer" title="22% Higher than last month"> 22% <i data-feather="chevron-up" class="w-4 h-4"></i> </div>
                      </div>
                   </div>
-                  <div class="text-3xl font-bold leading-8 mt-6">{{ $bulk_sms_mtn }}</div>
+                  <div id="bulksmsairtel" class="text-3xl font-bold leading-8 mt-6">0</div>
                   <div class="text-base text-gray-600 mt-1">Bulk Airtel</div>
                </div>
             </div>
@@ -84,10 +84,6 @@ pass data to the view  -->
         console.log(cash('#userChart')[0]);
         fetch('/usercharts').then(function (data) {
             data.json().then(function (response) {
-                console.log(response);
-                console.log(response.chardt);
-                console.log(response.charmt);
-                console.log(response.chardt.colours);
                 var ctx = cash('#userChart')[0].getContext('2d');
                 var chart = new Chart(ctx, {
                     type: 'bar',
@@ -143,6 +139,35 @@ pass data to the view  -->
     }
 
 })(userChart)
+
+
+
+(function(starts) {
+    "use strict";
+
+    if (starts('#bulksmsmtn').length) {
+        console.log('The target div has been found ...');
+        console.log(starts('#bulksmsmtn')[0]);
+
+        fetch('/bulksmsmtn').then(function (data) {
+            data.json().then(function (response) {
+                console.log(response);
+            });
+        });
+    }
+
+    if (starts('#bulksmsairtel').length) {
+        console.log('The target div has been found ...');
+        console.log(starts('#bulksmsairtel')[0]);
+
+        fetch('/bulksmsairtel').then(function (data) {
+            data.json().then(function (response) {
+                console.log(response);
+            });
+        });
+    }
+
+})(starts)
 
 </script>
 
