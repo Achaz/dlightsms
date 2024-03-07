@@ -142,39 +142,39 @@ pass data to the view  -->
 
 <script>
 
-(function() {
+(function($) {
     "use strict";
+    $(function() {
 
+        if ($("#bulkSmsMtn").length) {
+            console.log('The bulksmsmtn target div has been found ...');
+            console.log(document.getElementById("bulkSmsMtn"));
 
-    if (document.getElementById("bulkSmsMtn").length) {
-        console.log('The bulksmsmtn target div has been found ...');
-        console.log(document.getElementById("bulkSmsMtn"));
-
-        fetch('/bulksmsmtn').then(function (data) {
-            data.json().then(function (response) {
-                console.log(response);
+            fetch('/bulksmsmtn').then(function (data) {
+                data.json().then(function (response) {
+                    console.log(response);
+                });
             });
-        });
-    }
+        }
+    });
+})(jQuery);
 
-})()
 
-
-(function() {
+(function($) {
     "use strict";
+    $(function() {
+        if (document.getElementById("bulkSmsAirtel").length) {
+            console.log('The bulksmsairtel target div has been found ...');
+            console.log(document.getElementById("bulkSmsAirtel"));
 
-    if (document.getElementById("bulkSmsAirtel").length) {
-        console.log('The bulksmsairtel target div has been found ...');
-        console.log(document.getElementById("bulkSmsAirtel"));
-
-        fetch('/bulksmsairtel').then(function (data) {
-            data.json().then(function (response) {
-                console.log(response);
+            fetch('/bulksmsairtel').then(function (data) {
+                data.json().then(function (response) {
+                    console.log(response);
+                });
             });
-        });
-    }
-
-})()
+        }
+    });
+})(jQuery);
 
 </script>
 
