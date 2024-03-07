@@ -142,12 +142,13 @@ pass data to the view  -->
 
 <script>
 
-(function(bulkSmsMtn) {
+(function() {
     "use strict";
 
-    if (bulkSmsMtn('#bulkSmsMtn').length) {
+
+    if (document.getElementById("bulkSmsMtn").length) {
         console.log('The bulksmsmtn target div has been found ...');
-        console.log(bulkSmsMtn('#bulkSmsMtn'));
+        console.log(document.getElementById("bulkSmsMtn"));
 
         fetch('/bulksmsmtn').then(function (data) {
             data.json().then(function (response) {
@@ -156,15 +157,15 @@ pass data to the view  -->
         });
     }
 
-})(bulkSmsMtn)
+})()
 
 
-(function(bulkSmsAirtel) {
+(function() {
     "use strict";
 
-    if (bulkSmsAirtel('#bulkSmsAirtel').length) {
+    if (document.getElementById("bulkSmsAirtel").length) {
         console.log('The bulksmsairtel target div has been found ...');
-        console.log(bulkSmsAirtel('#bulkSmsAirtel'));
+        console.log(document.getElementById("bulkSmsAirtel"));
 
         fetch('/bulksmsairtel').then(function (data) {
             data.json().then(function (response) {
@@ -173,7 +174,7 @@ pass data to the view  -->
         });
     }
 
-})(bulkSmsAirtel)
+})()
 
 </script>
 
