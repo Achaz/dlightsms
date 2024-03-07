@@ -21,7 +21,14 @@
                         <div class="report-box__indicator bg-theme-9 tooltip cursor-pointer" title="12% Higher than last month"> 12% <i data-feather="chevron-up" class="w-4 h-4"></i> </div>
                      </div>
                   </div>
-                  <div id="bulkSmsMtn" class="text-3xl font-bold leading-8 mt-6">0</div>
+                  <div id="bulkSmsMtn" class="text-3xl font-bold leading-8 mt-6">
+                    <span></span>
+                    <div class="text-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                  </div>
                   <div class="text-base text-gray-600 mt-1">Bulk MTN</div>
                </div>
             </div>
