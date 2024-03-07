@@ -147,25 +147,25 @@ pass data to the view  -->
     $(function() {
 
         if ($("#bulkSmsMtn").length) {
-            console.log('The bulksmsmtn target div has been found ...');
-            console.log(document.getElementById("bulkSmsMtn"));
-
-            fetch('/bulksmsmtn').then(function (data) {
-                data.json().then(function (response) {
-                    console.log('MTN ...'+response);
+            $("#bulkSmsMtn").each(function(){
+                var targetDiv = $(this)
+                fetch('/bulksmsmtn').then(function (data) {
+                    data.json().then(function (response) {
+                        targetDiv.text();
+                    });
                 });
-            });
+            })
         }
 
         if ($("#bulkSmsAirtel").length) {
-            console.log('The bulksmsairtel target div has been found ...');
-            console.log($("#bulkSmsAirtel"));
-
-            fetch('/bulksmsairtel').then(function (data) {
-                data.json().then(function (response) {
-                    console.log('Airtel ...'+response);
+            $("#bulkSmsAirtel").each(function(){
+                var targetDiv = $(this);
+                fetch('/bulksmsairtel').then(function (data) {
+                    data.json().then(function (response) {
+                        targetDiv.text(response);
+                    });
                 });
-            });
+            })
         }
     });
 })(jQuery);
