@@ -80,8 +80,6 @@ pass data to the view  -->
 
     // Chart
     if (cash('#userChart').length) {
-        console.log('The target div has been found ...');
-        console.log(cash('#userChart')[0]);
         fetch('/usercharts').then(function (data) {
             data.json().then(function (response) {
                 var ctx = cash('#userChart')[0].getContext('2d');
@@ -140,13 +138,15 @@ pass data to the view  -->
 
 })(userChart)
 
+</script>
 
+<script>
 
 (function(smssts) {
     "use strict";
 
     if (smssts('#bulksmsmtn').length) {
-        console.log('The target div has been found ...');
+        console.log('The bulksmsmtn target div has been found ...');
         console.log(smssts('#bulksmsmtn'));
 
         fetch('/bulksmsmtn').then(function (data) {
@@ -157,7 +157,7 @@ pass data to the view  -->
     }
 
     if (smssts('#bulksmsairtel').length) {
-        console.log('The target div has been found ...');
+        console.log('The bulksmsairtel target div has been found ...');
         console.log(smssts('#bulksmsairtel'));
 
         fetch('/bulksmsairtel').then(function (data) {
