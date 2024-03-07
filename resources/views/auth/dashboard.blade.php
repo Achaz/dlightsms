@@ -21,7 +21,7 @@
                         <div class="report-box__indicator bg-theme-9 tooltip cursor-pointer" title="12% Higher than last month"> 12% <i data-feather="chevron-up" class="w-4 h-4"></i> </div>
                      </div>
                   </div>
-                  <div id="bulksmsmtn" class="text-3xl font-bold leading-8 mt-6">0</div>
+                  <div id="bulkSmsMtn" class="text-3xl font-bold leading-8 mt-6">0</div>
                   <div class="text-base text-gray-600 mt-1">Bulk MTN</div>
                </div>
             </div>
@@ -35,7 +35,7 @@
                         <div class="report-box__indicator bg-theme-9 tooltip cursor-pointer" title="22% Higher than last month"> 22% <i data-feather="chevron-up" class="w-4 h-4"></i> </div>
                      </div>
                   </div>
-                  <div id="bulksmsairtel" class="text-3xl font-bold leading-8 mt-6">0</div>
+                  <div id="bulkSmsAirtel" class="text-3xl font-bold leading-8 mt-6">0</div>
                   <div class="text-base text-gray-600 mt-1">Bulk Airtel</div>
                </div>
             </div>
@@ -142,12 +142,12 @@ pass data to the view  -->
 
 <script>
 
-(function(bulkSms) {
+(function(bulkSmsMtn) {
     "use strict";
 
-    if (bulkSms('#bulksmsmtn').length) {
+    if (bulkSmsMtn('#bulkSmsMtn').length) {
         console.log('The bulksmsmtn target div has been found ...');
-        console.log(bulkSms('#bulksmsmtn'));
+        console.log(bulkSmsMtn('#bulkSmsMtn'));
 
         fetch('/bulksmsmtn').then(function (data) {
             data.json().then(function (response) {
@@ -156,9 +156,15 @@ pass data to the view  -->
         });
     }
 
-    if (bulkSms('#bulksmsairtel').length) {
+})(bulkSmsMtn)
+
+
+(function(bulkSmsAirtel) {
+    "use strict";
+
+    if (bulkSmsAirtel('#bulkSmsAirtel').length) {
         console.log('The bulksmsairtel target div has been found ...');
-        console.log(bulkSms('#bulksmsairtel'));
+        console.log(bulkSmsAirtel('#bulkSmsAirtel'));
 
         fetch('/bulksmsairtel').then(function (data) {
             data.json().then(function (response) {
@@ -167,7 +173,7 @@ pass data to the view  -->
         });
     }
 
-})(bulkSms)
+})(bulkSmsAirtel)
 
 </script>
 
