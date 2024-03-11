@@ -109,7 +109,7 @@ class KeywordsController extends Controller
 
         Log::info("MO successfully received");
 
-        $response = $this->getResponse($sender,$keyword,$request);
+        $response = $this->getResponse($keyword);
 
         $msg_id = $this->random_strings(12);
 
@@ -201,59 +201,34 @@ class KeywordsController extends Controller
 
     }
 
-    public function getResponse($phone,$keywd,$request){
+    public function getResponse($keywd){
         // if there is a function to process it, call that function
-        $skeywd = strtolower($keywd);
+        //$skeywd = strtolower($keywd);
+   
+        $sqlb = DB::select("SELECT response FROM keywords WHERE keywd = '$keywd'");
 
-        switch($skeywd) {
-            case "mbd":
-                if (!isset($request)) {
-                    $resp = "To get company details, type MBD<space>Company name and send to shortcode. Each SMS costs 220/-";
-                } else {
-                    //$resp = getMBD($request);
+        if(collect($sqlb)->first()){
+
+            for ($i=0; $i<=count($sqlb); $i++) {
+
+                try {
+
+                    $resp = $sqlb[$i]->response;
+                    //dd($resp);
+                } catch (\Throwable $th) {
+                    //throw $th;
+                    logger($th);
                 }
-                break;
-            case "sub":
-                if (!isset($request)) {     
-                    $resp = "To subscribe, type SUB<space>Keyword and send to shortcode. Each SMS costs 150/=";
-                        } else {
-                    #$resp = $phone;
-                                //$resp = subscribe($phone,$request);
-                        }
-                        break;
-            case "kbid":
-            if (!isset($request)) {
-                                $resp = "To participate, type KBID<space>amount and send to shortcode. Each SMS costs 220/=";
-                        } else {
-                                #$resp = $phone;
-                                //$resp = processBid($phone,$request);
-                        }
-                        break;
-            case "ads":
-                if (!isset($request)) {
-                    $resp = "To send your ad to us via SMS, type ADS<space>your text and send to shortcode.Each SMS costs 220/-";
-                } else {
-                    //$resp = classifieds($phone,$request);
-                }
-                break;
-            default:
-                
-                $sqlb = DB::select("SELECT response FROM keywords WHERE keywd = '$keywd'");
-    
-                for ($i=0; $i<=count($sqlb); $i++) {
 
-                    try {
+            } 
+                 
+            return $resp;  
 
-                        $resp = $sqlb[$i]->response;
-                        //dd($resp);
-                    } catch (\Throwable $th) {
-                        //throw $th;
-                        logger($th);
-                    }
+        }else{
 
-                }      
-                return $resp;  
-
+            return $resp = "Thank you for the message.We've logged your request.";
         }
+        
     }
+
 }
