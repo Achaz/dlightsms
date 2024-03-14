@@ -15,15 +15,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - run: npm install
-    - name: Commit built assets
-      run: |
-        git config --local user.email "jtugume123@gmail.com"
-        git config --local user.name "Achaz"
-        git checkout -B main
-        git add -f public/
-        git commit -m "Build front-end assets"
-        git push -f origin main
     - name: Deploy to production
       uses: appleboy/ssh-action@master
       with:
