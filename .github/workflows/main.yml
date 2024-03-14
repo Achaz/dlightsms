@@ -1,0 +1,35 @@
+name: CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.PUSH_TOKEN }}
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: npm install
+    - run: npm run production
+    - name: Commit built assets
+      run: |
+        git config --local user.email "jtugume123@gmail.com"
+        git config --local user.name "Achaz"
+        git checkout -B main
+        git add -f public/
+        git commit -m "Build front-end assets"
+        git push -f origin main
+    - name: Deploy to production
+      uses: appleboy/ssh-action@master
+      with:
+        username: omulimisa
+        host: 170.187.156.185
+        port: 2299
+        password: ${{ secrets.SSH_PASSWORD }}
+        script: 'cd /usr/share/nginx/html/github_runner && ./server_deploy.sh'
