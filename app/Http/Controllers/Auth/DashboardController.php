@@ -147,25 +147,6 @@ class DashboardController extends Controller
 
     }
 
-    public function tokens_airtel()
-    {
-        $api_dlr_airtel = DB::select("SELECT count(phonenum) AS total FROM ost_api_dlr WHERE phonenum REGEXP '^2567[0|5|4]' and  MONTH(ts_stamp) = MONTH(now())");
-
-        $total = $api_dlr_airtel[0]->total;
-
-        return $total;
-    }
-
-    public function tokens_mtn()
-    {
-
-        $api_dlr_mtn = DB::select("SELECT count(phonenum) AS total FROM ost_api_dlr WHERE phonenum REGEXP '^2567[7|8|6]' and  MONTH(ts_stamp) = MONTH(now())");
-
-        $total = $api_dlr_mtn[0]->total;
-
-        return $total;
-    }
-
     public function bulk_mtn()
     {
 
