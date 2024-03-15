@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use App\Models\SmsCredit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -35,25 +34,20 @@ class DashboardController extends Controller
         $colourms=$colours=$colours_api_mtn=$colours_api_airtel=[];
 
         for ($i=0; $i<=count($chart); $i++) {
-
             $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-
         }
 
         for ($i=0; $i < count($mtn); $i++) {
             $colourms[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
         }
 
-
         $chardt['labels'] = (array_column($chart,"month"));
         $chardt['dataset'] = (array_column($chart,"total"));
         $chardt['colours'] = $colours;
-        //$chardt = (object)  $chardt;
-
+        
         $charmt['labels'] = (array_column($mtn,"month"));
         $charmt['dataset'] = (array_column($mtn,"total"));
         $charmt['colours'] = $colourms;
-        //$charmt = (object)  $charmt;
 
         $consolidatedData = [
             'chardt'=>$chardt,
@@ -105,10 +99,10 @@ class DashboardController extends Controller
 
         $ts_stamp =\Carbon\Carbon::now()->toDateTimeString();
         Log::info($ts_stamp);
-        // insert into different table based on the delivery status. For DLR = 8, have a pending_sms table. For the rest, insert directly as they are final statues.
+       
         switch ($dlrvalue) {
             case 8:
-                //$sql = "INSERT INTO ost_bulksms_pending_sms(senderid,phonenum,dlrvalue,smscid,ts_stamp,smsid,user_id,log_no,msg) VALUES('".$senderid."','".$phonenum."','".$dlrvalue."','".$smscid."',CURRENT_TIMESTAMP,'".$smsid."',".$user_id.",".$log_no.",'".$msg."')";
+                
                 DB::table('ost_bulksms_pending_sms')->insert([
                     'senderid' => $senderid,
                     'phonenum' => $phonenum,
@@ -125,7 +119,7 @@ class DashboardController extends Controller
                 ]);
                 break;
                 default:
-                //$sql = "INSERT INTO ost_dlr_reports(senderid,phonenum,dlrvalue,smscid,ts_stamp,smsid,user_id,log_no,msg) VALUES('".$senderid."','".$phonenum."','".$dlrvalue."','".$smscid."',CURRENT_TIMESTAMP,'".$smsid."',".$user_id.",".$log_no.",'".$msg."')";
+               
                 DB::table('ost_dlr_reports')->insert([
                     'senderid' => $senderid,
                     'phonenum' => $phonenum,
@@ -144,6 +138,7 @@ class DashboardController extends Controller
                 Log::info("Delivery reports inserted successfully!");
 
             }
+
 
     }
 
