@@ -22,4 +22,4 @@ jobs:
         host: 170.187.156.185
         port: 2299
         password: ${{ secrets.SSH_PASSWORD }}
-        script: 'cd /usr/share/nginx/html/github_runner && ./server_deploy.sh'
+        script: 'cd /usr/share/nginx/html/github_runner && chmod +x server_deploy.sh && ./server_deploy.sh'
